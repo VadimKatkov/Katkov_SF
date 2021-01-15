@@ -1,8 +1,12 @@
 import numpy as np
 
 def game_core(number):
-    '''Сначала устанавливаем любое random число, а потом уменьшаем или увеличиваем его в зависимости от того, больше оно или меньше нужного.
-       Функция принимает загаданное число и возвращает число попыток'''
+    '''Сначала устанавливаем любое random число
+    Механизм поиска - каждый раз уменьшаем диапазон поиска в два раза
+    Для этого определяем нижний (min_predict) и верхний (max_predict) предел диапазона поиска
+    Загаданное число сравниваем с верхним пределом
+    '''
+
     min_predict = 1
     max_predict = 50
     count = 1
@@ -16,7 +20,7 @@ def game_core(number):
             max_predict = min_predict + (max_predict - min_predict) // 2 - 1
         else:
             max_predict = min_predict + (max_predict - min_predict) // 2
-    print("угаданное число", max_predict, "попыток", count)
+    print("загаданное число", number, "угаданное число", max_predict, "попыток", count)
     return(count)  # выход из цикла, если угадали
 
 
