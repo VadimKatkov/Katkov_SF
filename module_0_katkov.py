@@ -1,8 +1,9 @@
 import numpy as np
 
 def guess_try(number, min_predict, max_predict):
-    ''' в этой функции попытка угадать число в диапазоне
-    этот шаг уменьшает количество попыток на 1
+    '''
+    Trying just to guess number in range
+    This reduces tries for 1 step
     '''
     lucky_guess = np.random.randint(min_predict, max_predict + 1)
     if number == lucky_guess:
@@ -11,11 +12,12 @@ def guess_try(number, min_predict, max_predict):
         return max_predict
 
 def game_core(number):
-    '''Сначала устанавливаем любое random число
-    Механизм поиска - каждый раз уменьшаем диапазон поиска в два раза
-    Для этого определяем нижний (min_predict) и верхний (max_predict) предел диапазона поиска
-    Загаданное число сравниваем с верхним пределом
-    Ну и еще просто каждый раз пробуем угадать число  (def guess_try) в проверяемом диапазоне ))
+    '''
+    Set random number
+    Overall approach - reducing current range twice
+    Setting up floor (min_predict) and ceiling (max_predict) for range
+    Comparing number with ceiling
+    At every step just trying to guess number (def guess_try) in range
     '''
 
     min_predict = 1
@@ -41,12 +43,12 @@ def game_core(number):
 
 
 def score_game(core):
-    '''Запускаем игру 1000 раз, чтобы узнать, как быстро игра угадывает число'''
-    count_ls = []
+    '''Launch game 1000 times, to find out as soon we could guess number'''
+
     np.random.seed(1)  # фиксируем RANDOM SEED, чтобы ваш эксперимент был воспроизводим!
     random_array = np.random.randint(1, 101, size=1000)
-    count_ls = list(map(lambda num: game_core(num), random_array))
-    score = int(np.mean(count_ls))
+    count_try = list(map(lambda num: game_core(num), random_array))
+    score = int(np.mean(count_try))
     print(f"Ваш алгоритм угадывает число в среднем за {score} попыток")
     return score
 
